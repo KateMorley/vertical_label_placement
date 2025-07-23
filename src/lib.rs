@@ -224,10 +224,10 @@ impl ClusterList {
     /// Pops and returns the last cluster from the list if it is not sufficiently separated from the
     /// specified cluster, and otherwise returns `None`.
     fn pop_if_not_separate(&mut self, cluster: Cluster) -> Option<Cluster> {
-        if let Some(previous) = self.vec.last() {
-            if previous.end + self.separation > cluster.start {
-                return self.vec.pop();
-            }
+        if let Some(previous) = self.vec.last()
+            && previous.end + self.separation > cluster.start
+        {
+            return self.vec.pop();
         }
 
         None
